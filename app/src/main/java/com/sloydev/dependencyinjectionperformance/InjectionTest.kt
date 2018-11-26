@@ -51,6 +51,8 @@ class InjectionTest : KoinComponent {
         runKodeinJavaInjection()
         runDaggerKotlinInjection()
         runDaggerJavaInjection()
+        runCustomKotlinInjection()
+        runCustomJavaInjection()
         Log.d("KOIN-RESULT", "=========|=====================")
         Log.d("KOIN-RESULT", " ")
     }
@@ -137,6 +139,30 @@ class InjectionTest : KoinComponent {
             }
         }
         report(durations, startup, "Dagger2 + Java")
+    }
+
+    private fun runCustomKotlinInjection() {
+        val startup = measureDuration {
+            DIContainer.loadModule(customKotlinModule)
+        }
+        val durations = (1..rounds).map {
+            measureDuration {
+                DIContainer.get<Fib8>()
+            }
+        }
+        report(durations, startup, "Custom + Kotlin")
+    }
+
+    private fun runCustomJavaInjection() {
+        val startup = measureDuration {
+            DIContainer.loadModule(customJavaModule)
+        }
+        val durations = (1..rounds).map {
+            measureDuration {
+                DIContainer.get<FibonacciJava.Fib8>()
+            }
+        }
+        report(durations, startup, "Custom + Java")
     }
 
     private fun report(durations: List<Double>, startup: Double, testName: String) {
