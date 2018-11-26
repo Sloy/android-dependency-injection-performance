@@ -2,8 +2,13 @@ package com.sloydev.dependencyinjectionperformance
 
 import android.os.Build
 import android.util.Log
+import com.sloydev.dependencyinjectionperformance.custom.DIContainer
+import com.sloydev.dependencyinjectionperformance.custom.customJavaModule
+import com.sloydev.dependencyinjectionperformance.custom.customKotlinModule
 import com.sloydev.dependencyinjectionperformance.dagger2.DaggerJavaDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.DaggerKotlinDaggerComponent
+import com.sloydev.dependencyinjectionperformance.dagger2.JavaDaggerComponent
+import com.sloydev.dependencyinjectionperformance.dagger2.KotlinDaggerComponent
 import com.sloydev.dependencyinjectionperformance.koin.koinJavaModule
 import com.sloydev.dependencyinjectionperformance.koin.koinKotlinModule
 import org.kodein.di.Kodein
@@ -51,74 +56,93 @@ class InjectionTest : KoinComponent {
     }
 
     private fun runKoinKotlinInjection() {
-        StandAloneContext.startKoin(listOf(koinKotlinModule), logger = testLogger)
+        val startup = measureDuration {
+            StandAloneContext.startKoin(listOf(koinKotlinModule), logger = testLogger)
+        }
+
         val durations = (1..rounds).map {
             measureDuration {
                 get<Fib8>()
             }
         }
-        report(durations, "Koin + Kotlin")
+        report(durations, startup, "Koin + Kotlin")
         stopKoin()
     }
 
     private fun runKoinJavaInjection() {
-        StandAloneContext.startKoin(listOf(koinJavaModule), logger = testLogger)
+        val startup = measureDuration {
+            StandAloneContext.startKoin(listOf(koinJavaModule), logger = testLogger)
+        }
+
         val durations = (1..rounds).map {
             measureDuration {
                 get<FibonacciJava.Fib8>()
             }
         }
-        report(durations, "Koin + Java")
+        report(durations, startup, "Koin + Java")
         stopKoin()
     }
 
     private fun runKodeinKotlinInjection() {
-        val kodein = Kodein {
-            import(kodeinKotlinModule)
+        lateinit var kodein: Kodein
+        val startup = measureDuration {
+            kodein = Kodein {
+                import(kodeinKotlinModule)
+            }
         }
         val durations = (1..rounds).map {
             measureDuration {
                 kodein.direct.instance<Fib8>()
             }
         }
-        report(durations, "Kodein + Kotlin")
+        report(durations, startup, "Kodein + Kotlin")
     }
 
     private fun runKodeinJavaInjection() {
-        val kodein = Kodein {
-            import(kodeinJavaModule)
+        lateinit var kodein: Kodein
+        val startup = measureDuration {
+            kodein = Kodein {
+                import(kodeinJavaModule)
+            }
         }
         val durations = (1..rounds).map {
             measureDuration {
                 kodein.direct.instance<FibonacciJava.Fib8>()
             }
         }
-        report(durations, "Kodein + Java")
+        report(durations, startup, "Kodein + Java")
     }
 
     private fun runDaggerKotlinInjection() {
-        val component = DaggerKotlinDaggerComponent.create()
+        lateinit var component: KotlinDaggerComponent
+        val startup = measureDuration {
+            component = DaggerKotlinDaggerComponent.create()
+        }
         val durations = (1..rounds).map {
             measureDuration {
                 component.inject(kotlinDaggerTest)
             }
         }
-        report(durations, "Dagger2 + Kotlin")
+        report(durations, startup, "Dagger2 + Kotlin")
     }
 
     private fun runDaggerJavaInjection() {
-        val component = DaggerJavaDaggerComponent.create()
+        lateinit var component: JavaDaggerComponent
+        val startup = measureDuration {
+            component = DaggerJavaDaggerComponent.create()
+        }
         val durations = (1..rounds).map {
             measureDuration {
                 component.inject(javaDaggerTest)
             }
         }
-        report(durations, "Dagger2 + Java")
+        report(durations, startup, "Dagger2 + Java")
     }
 
-    private fun report(durations: List<Double>, testName: String) {
+    private fun report(durations: List<Double>, startup: Double, testName: String) {
         Log.d("KOIN-RESULT", "---------|--------------------")
         Log.d("KOIN-RESULT", "Test:    | $testName")
+        Log.d("KOIN-RESULT", "Startup: | ${startup.format()} ms")
         Log.d("KOIN-RESULT", "Min-Max: | ${durations.min().format()}-${durations.max().format()} ms")
         Log.d("KOIN-RESULT", "Average: | ${durations.average().format()} ms")
     }
