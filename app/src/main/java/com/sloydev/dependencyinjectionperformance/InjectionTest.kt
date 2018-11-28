@@ -9,6 +9,8 @@ import com.sloydev.dependencyinjectionperformance.dagger2.DaggerJavaDaggerCompon
 import com.sloydev.dependencyinjectionperformance.dagger2.DaggerKotlinDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.JavaDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.KotlinDaggerComponent
+import com.sloydev.dependencyinjectionperformance.katana.katanaJavaModule
+import com.sloydev.dependencyinjectionperformance.katana.katanaKotlinModule
 import com.sloydev.dependencyinjectionperformance.koin.koinJavaModule
 import com.sloydev.dependencyinjectionperformance.koin.koinKotlinModule
 import org.kodein.di.Kodein
@@ -20,6 +22,8 @@ import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext
 import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.get
+import org.rewedigital.katana.Component
+import org.rewedigital.katana.createComponent
 import javax.inject.Inject
 
 class InjectionTest : KoinComponent {
@@ -51,6 +55,8 @@ class InjectionTest : KoinComponent {
         runKodeinJavaInjection()
         runDaggerKotlinInjection()
         runDaggerJavaInjection()
+        runKatanaKotlinInjection()
+        runKatanaJavaInjection()
         runCustomKotlinInjection()
         runCustomJavaInjection()
         Log.d("KOIN-RESULT", "=========|=====================")
@@ -139,6 +145,32 @@ class InjectionTest : KoinComponent {
             }
         }
         report(durations, startup, "Dagger2 + Java")
+    }
+
+    private fun runKatanaKotlinInjection() {
+        lateinit var component: Component
+        val startup = measureDuration {
+            component = createComponent(modules = listOf(katanaKotlinModule))
+        }
+        val durations = (1..rounds).map {
+            measureDuration {
+                component.injectNow<Fib8>()
+            }
+        }
+        report(durations, startup, "Katana + Kotlin")
+    }
+
+    private fun runKatanaJavaInjection() {
+        lateinit var component: Component
+        val startup = measureDuration {
+            component = createComponent(modules = listOf(katanaJavaModule))
+        }
+        val durations = (1..rounds).map {
+            measureDuration {
+                component.injectNow<FibonacciJava.Fib8>()
+            }
+        }
+        report(durations, startup, "Katana + Java")
     }
 
     private fun runCustomKotlinInjection() {
