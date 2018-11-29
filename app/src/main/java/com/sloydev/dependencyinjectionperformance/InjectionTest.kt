@@ -50,7 +50,7 @@ class InjectionTest : KoinComponent {
         log("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java")
         log("--- | ---:| ---:| ---:| ---:")
         results.forEach {
-            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.format()} | ${it[Variant.JAVA].startupTime.format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}")
+            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}")
         }
     }
 
@@ -59,7 +59,9 @@ class InjectionTest : KoinComponent {
         test: () -> Unit,
         teardown: () -> Unit = {}
     ): TestResult {
-        val startup = measureTime { setup() }
+        val startup = (1..rounds).map { measureTime { setup() }.also { teardown() } }
+        setup()
+
         val testDurations = (1..rounds).map { measureTime { test() } }
         teardown()
         return TestResult(startup, testDurations)
