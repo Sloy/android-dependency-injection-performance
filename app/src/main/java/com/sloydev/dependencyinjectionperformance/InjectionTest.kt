@@ -50,7 +50,7 @@ class InjectionTest : KoinComponent {
         log("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java")
         log("--- | ---:| ---:| ---:| ---:")
         results.forEach {
-            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.format()} | ${it[Variant.JAVA].startupTime.format()}  | ${it[Variant.KOTLIN].injectionTime.average().format()} | ${it[Variant.JAVA].injectionTime.average().format()}")
+            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.format()} | ${it[Variant.JAVA].startupTime.format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}")
         }
     }
 

@@ -22,6 +22,8 @@ fun Milliseconds?.format() = String.format("%.2f ms", this)
 
 fun measureTime(block: () -> Unit): Milliseconds = measureNanoTime(block) / 1000000.0
 
+fun List<Milliseconds>.median() = sorted().let { (it[it.size / 2] + it[(it.size - 1) / 2]) / 2 }
+
 
 fun log(msg: String) {
     Log.i("DI-TEST", msg)
