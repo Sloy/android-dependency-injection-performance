@@ -3,14 +3,14 @@
 This project aims to measure the performance of several Dependency Injection frameworks (or Service Locators) in different devices.
 
 ## Libraries tested
-- [Koin](https://insert-koin.io/) - 1.0.1
+- [Koin](https://insert-koin.io/) - 2.0.0-alpha-2
 - [Kodein](http://kodein.org/Kodein-DI/) - 5.3.0
 - [Dagger 2](https://google.github.io/dagger/) - 2.16
 - [Katana](https://github.com/rewe-digital-incubator/katana/) - 1.0.1
 
 ## The test
 The test data are classes with dependencies in a structure similar to Fibonacci sequence, to simulate multiple levels of transitive dependencies.
-For each library there is a test with Kotlin classes and one with Java classes, because some libraries seem to be affected by this.
+For each library there is a test with Kotlin classes and one with Java classes, because some libraries seem to be affected by this difference.
 
 Each test injects one of this dependencies 100 times and prints the maximum time, the minimum and the average.
 
@@ -19,165 +19,89 @@ The project contains an Android application that run the tests on its onCreate a
 The actual test is implemented in the class [InjectionTest.kt](https://github.com/Sloy/android-dependency-injection-performance/blob/master/app/src/main/java/com/sloydev/dependencyinjectionperformance/InjectionTest.kt)
 
 ## Results
-Results can be quite different between different devices, so here are some results in different devices with different Android versions. More results are welcomed.
+Results can be quite different between different devices, so here are some results in different devices with different Android versions. Each table contains the **median** time of each library's setup and injection. More results are welcomed.
 
 - [Samsung Galaxy J5](#samsung-galaxy-j5)
+- [Samsung Galaxy S8](#samsung-galaxy-s8)
 - [Huawei P8 Lite](#huawei-p8-lite)
+- [Xiaomi MI A1](#xiaomi-mi-a1)
 - [OnePlus One](#oneplus-one)
-- [OnePlus 5](#huawei-p8-lite)
+- [OnePlus 5](#oneplus-5)
 - [Nexus 6](#nexus-6)
 
 ### Samsung Galaxy J5
-```
-=========|=====================
-Device:  | samsung j5nlte v6.0.1
----------|--------------------
-Test:    | Koin + Kotlin
-Min-Max: | 47,41-74,25 ms
-Average: | 60,16 ms
----------|--------------------
-Test:    | Koin + Java
-Min-Max: | 189,77-205,96 ms
-Average: | 194,09 ms
----------|--------------------
-Test:    | Kodein + Kotlin
-Min-Max: | 0,76-3,38 ms
-Average: | 0,83 ms
----------|--------------------
-Test:    | Kodein + Java
-Min-Max: | 0,82-4,67 ms
-Average: | 0,93 ms
----------|--------------------
-Test:    | Dagger2 + Kotlin
-Min-Max: | 0,03-9,48 ms
-Average: | 0,12 ms
----------|--------------------
-Test:    | Dagger2 + Java
-Min-Max: | 0,02-2,03 ms
-Average: | 0,05 ms
-=========|=====================
-```
+samsung j5nlte with Android 6.0.1
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 50,86 ms | 51,20 ms  | 12,00 ms | 11,97 ms
+**Kodein** | 69,35 ms | 69,30 ms  | 8,47 ms | 8,39 ms
+**Katana** | 11,48 ms | 11,42 ms  | 2,07 ms | 2,04 ms
+**Custom** | 4,75 ms | 4,78 ms  | 0,70 ms | 0,84 ms
+**Dagger** | 0,02 ms | 0,02 ms  | 0,25 ms | 0,22 ms
+
+### Samsung Galaxy S8
+samsung dreamlte with Android 8.0.0
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 4,42 ms | 4,54 ms  | 0,81 ms | 0,87 ms
+**Kodein** | 5,28 ms | 5,50 ms  | 0,14 ms | 0,13 ms
+**Katana** | 0,47 ms | 0,42 ms  | 0,07 ms | 0,09 ms
+**Custom** | 0,11 ms | 0,12 ms  | 0,05 ms | 0,05 ms
+**Dagger** | 0,01 ms | 0,01 ms  | 0,04 ms | 0,04 ms
 
 ### Huawei P8 Lite
-```
-=========|=====================
-Device:  | Huawei hwALE-H v6.0
----------|--------------------
-Test:    | Koin + Kotlin
-Min-Max: | 245,43-273,91 ms
-Average: | 253,30 ms
----------|--------------------
-Test:    | Koin + Java
-Min-Max: | 373,67-399,93 ms
-Average: | 377,57 ms
----------|--------------------
-Test:    | Kodein + Kotlin
-Min-Max: | 7,49-15,63 ms
-Average: | 7,63 ms
----------|--------------------
-Test:    | Kodein + Java
-Min-Max: | 7,94-10,78 ms
-Average: | 8,08 ms
----------|--------------------
-Test:    | Dagger2 + Kotlin
-Min-Max: | 0,22-5,60 ms
-Average: | 0,28 ms
----------|--------------------
-Test:    | Dagger2 + Java
-Min-Max: | 0,20-5,04 ms
-Average: | 0,25 ms
-=========|=====================
-```
+Huawei hwALE-H with Android 6.0
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 47,04 ms | 47,68 ms  | 11,26 ms | 10,89 ms
+**Kodein** | 64,97 ms | 64,91 ms  | 7,58 ms | 7,59 ms
+**Katana** | 10,37 ms | 10,43 ms  | 1,93 ms | 1,90 ms
+**Custom** | 4,32 ms | 4,32 ms  | 0,65 ms | 0,80 ms
+**Dagger** | 0,01 ms | 0,01 ms  | 0,23 ms | 0,20 ms
+
+### Xiaomi MI A1
+xiaomi tissot_sprout with Android 8.1.0
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 6,78 ms | 6,78 ms  | 1,27 ms | 1,31 ms
+**Kodein** | 11,18 ms | 10,95 ms  | 0,29 ms | 0,26 ms
+**Katana** | 0,97 ms | 0,90 ms  | 0,13 ms | 0,13 ms
+**Custom** | 0,24 ms | 0,24 ms  | 0,08 ms | 0,10 ms
+**Dagger** | 0,01 ms | 0,01 ms  | 0,09 ms | 0,05 ms
 
 ### OnePlus One
-```
-=========|=====================
-Device:  | oneplus A0001 v5.0.2
----------|--------------------
-Test:    | Koin + Kotlin
-Min-Max: | 26,78-73,14 ms
-Average: | 34,38 ms
----------|--------------------
-Test:    | Koin + Java
-Min-Max: | 105,04-201,14 ms
-Average: | 128,99 ms
----------|--------------------
-Test:    | Kodein + Kotlin
-Min-Max: | 1,11-3,34 ms
-Average: | 1,34 ms
----------|--------------------
-Test:    | Kodein + Java
-Min-Max: | 1,27-3,06 ms
-Average: | 1,40 ms
----------|--------------------
-Test:    | Dagger2 + Kotlin
-Min-Max: | 0,02-2,81 ms
-Average: | 0,07 ms
----------|--------------------
-Test:    | Dagger2 + Java
-Min-Max: | 0,02-1,84 ms
-Average: | 0,05 ms
-=========|=====================
-```
+oneplus A0001 with Android 5.0.2
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 54,55 ms | 59,10 ms  | 13,72 ms | 14,30 ms
+**Kodein** | 78,66 ms | 73,30 ms  | 8,79 ms | 7,02 ms
+**Katana** | 12,08 ms | 9,38 ms  | 2,02 ms | 2,02 ms
+**Custom** | 4,27 ms | 4,32 ms  | 0,70 ms | 0,92 ms
+**Dagger** | 0,02 ms | 0,02 ms  | 0,22 ms | 0,19 ms
 
 ### OnePlus 5
-```
-=========|=====================
-Device:  | OnePlus OnePlus5 v8.1.0
----------|--------------------
-Test:    | Koin + Kotlin
-Min-Max: | 4,08-23,18 ms
-Average: | 5,04 ms
----------|--------------------
-Test:    | Koin + Java
-Min-Max: | 4,61-11,47 ms
-Average: | 5,16 ms
----------|--------------------
-Test:    | Kodein + Kotlin
-Min-Max: | 0,09-3,51 ms
-Average: | 0,27 ms
----------|--------------------
-Test:    | Kodein + Java
-Min-Max: | 0,09-1,03 ms
-Average: | 0,16 ms
----------|--------------------
-Test:    | Dagger2 + Kotlin
-Min-Max: | 0,01-0,42 ms
-Average: | 0,04 ms
----------|--------------------
-Test:    | Dagger2 + Java
-Min-Max: | 0,01-0,32 ms
-Average: | 0,03 ms
-=========|=====================
-```
+OnePlus OnePlus5 with Android 8.1.0
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 3,09 ms | 3,02 ms  | 0,54 ms | 0,58 ms
+**Kodein** | 4,78 ms | 4,66 ms  | 0,11 ms | 0,10 ms
+**Katana** | 0,33 ms | 0,32 ms  | 0,06 ms | 0,07 ms
+**Custom** | 0,08 ms | 0,08 ms  | 0,04 ms | 0,04 ms
+**Dagger** | 0,01 ms | 0,01 ms  | 0,05 ms | 0,04 ms
 
 ### Nexus 6
-```
-=========|=====================
-Device:  | google shamu v7.1.1
----------|--------------------
-Test:    | Koin + Kotlin
-Min-Max: | 12,47-52,59 ms
-Average: | 15,56 ms
----------|--------------------
-Test:    | Koin + Java
-Min-Max: | 15,30-26,37 ms
-Average: | 17,14 ms
----------|--------------------
-Test:    | Kodein + Kotlin
-Min-Max: | 0,50-13,12 ms
-Average: | 1,50 ms
----------|--------------------
-Test:    | Kodein + Java
-Min-Max: | 0,52-5,87 ms
-Average: | 0,98 ms
----------|--------------------
-Test:    | Dagger2 + Kotlin
-Min-Max: | 0,13-1,46 ms
-Average: | 0,32 ms
----------|--------------------
-Test:    | Dagger2 + Java
-Min-Max: | 0,10-1,15 ms
-Average: | 0,30 ms
-=========|=====================
-```
+google shamu with Android 7.1.1
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 17,49 ms | 18,83 ms  | 3,13 ms | 4,32 ms
+**Kodein** | 17,48 ms | 15,95 ms  | 0,60 ms | 0,47 ms
+**Katana** | 0,97 ms | 0,97 ms  | 0,54 ms | 0,59 ms
+**Custom** | 0,20 ms | 0,21 ms  | 0,20 ms | 0,20 ms
+**Dagger** | 0,02 ms | 0,02 ms  | 0,22 ms | 0,13 ms
