@@ -1,7 +1,7 @@
 package com.sloydev.dependencyinjectionperformance.koin
 
 import com.sloydev.dependencyinjectionperformance.FibonacciJava
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 /**
  * Generated with https://gist.github.com/Sloy/12affca1e49ba052053ab4c8bfc5bcb4
