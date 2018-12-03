@@ -3,7 +3,7 @@
 This project aims to measure the performance of several Dependency Injection frameworks (or Service Locators) in different devices.
 
 ## Libraries tested
-- [Koin](https://insert-koin.io/) - 2.0.0-alpha-2
+- [Koin](https://insert-koin.io/) - 2.0.0-alpha-3
 - [Kodein](http://kodein.org/Kodein-DI/) - 5.3.0
 - [Dagger 2](https://google.github.io/dagger/) - 2.16
 - [Katana](https://github.com/rewe-digital-incubator/katana/) - 1.0.1
