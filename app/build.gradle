@@ -38,5 +38,5 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.16'
 
     // Katana
-    implementation 'com.github.rewe-digital-incubator.katana:katana-android:1.2.0'
+    implementation 'com.github.rewe-digital-incubator.katana:katana-android:1.2.1'
 }
