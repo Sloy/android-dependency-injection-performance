@@ -1,7 +1,10 @@
 package com.sloydev.dependencyinjectionperformance.katana
 
 import com.sloydev.dependencyinjectionperformance.FibonacciJava
+import org.rewedigital.katana.bind
 import org.rewedigital.katana.createModule
+import org.rewedigital.katana.factory
+import org.rewedigital.katana.get
 
 val katanaJavaModule = createModule("katanaJavaModule") {
     bind<FibonacciJava.Fib1> { factory { FibonacciJava.Fib1() } }
