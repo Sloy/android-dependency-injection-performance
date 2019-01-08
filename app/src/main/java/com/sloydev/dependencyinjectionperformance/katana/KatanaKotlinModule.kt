@@ -1,7 +1,10 @@
 package com.sloydev.dependencyinjectionperformance.katana
 
 import com.sloydev.dependencyinjectionperformance.*
+import org.rewedigital.katana.bind
 import org.rewedigital.katana.createModule
+import org.rewedigital.katana.factory
+import org.rewedigital.katana.get
 
 val katanaKotlinModule = createModule("katanaKotlinModule") {
     bind<Fib1> { factory { Fib1() } }

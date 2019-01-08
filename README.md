@@ -6,7 +6,7 @@ This project aims to measure the performance of several Dependency Injection fra
 - [Koin](https://insert-koin.io/) - 2.0.0-alpha-3
 - [Kodein](http://kodein.org/Kodein-DI/) - 5.3.0
 - [Dagger 2](https://google.github.io/dagger/) - 2.16
-- [Katana](https://github.com/rewe-digital-incubator/katana/) - 1.0.1
+- [Katana](https://github.com/rewe-digital-incubator/katana/) - 1.2.2
 
 ## The test
 The test data are classes with dependencies in a structure similar to Fibonacci sequence, to simulate multiple levels of transitive dependencies.

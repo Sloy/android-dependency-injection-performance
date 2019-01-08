@@ -20,6 +20,9 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.get
 import org.rewedigital.katana.Component
+import org.rewedigital.katana.Katana
+import org.rewedigital.katana.android.environment.AndroidEnvironmentContext
+import org.rewedigital.katana.android.environment.AndroidEnvironmentContext.Profile.SPEED
 import org.rewedigital.katana.createComponent
 import javax.inject.Inject
 
@@ -107,6 +110,7 @@ class InjectionTest : KoinComponent {
 
     private fun katanaTest(): LibraryResult {
         log("Running Katana...")
+        Katana.environmentContext = AndroidEnvironmentContext(profile = SPEED)
         lateinit var component: Component
         return LibraryResult("Katana", mapOf(
             Variant.KOTLIN to runTest(
