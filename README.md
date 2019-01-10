@@ -34,74 +34,74 @@ samsung j5nlte with Android 6.0.1
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 50.23 ms | 51.90 ms  | 2.47 ms | 2.46 ms
-**Kodein** | 69.35 ms | 69.30 ms  | 8.47 ms | 8.39 ms
-**Katana** | 11.48 ms | 11.42 ms  | 2.07 ms | 2.04 ms
-**Custom** | 4.75 ms | 4.78 ms  | 0.70 ms | 0.84 ms
-**Dagger** | 0.02 ms | 0.02 ms  | 0.25 ms | 0.22 ms
+**Koin** | 51.47 ms | 53.65 ms  | 2.47 ms | 2.52 ms
+**Kodein** | 73.36 ms | 75.21 ms  | 9.89 ms | 9.58 ms
+**Katana** | 12.34 ms | 12.30 ms  | 2.00 ms | 1.94 ms
+**Custom** | 4.85 ms | 4.81 ms  | 0.73 ms | 0.84 ms
+**Dagger** | 0.02 ms | 0.02 ms  | 0.27 ms | 0.23 ms
 
 ### Samsung Galaxy S8
 samsung dreamlte with Android 8.0.0
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 4.32 ms | 4.55 ms  | 0.08 ms | 0.08 ms
-**Kodein** | 5.28 ms | 5.50 ms  | 0.14 ms | 0.13 ms
-**Katana** | 0.47 ms | 0.42 ms  | 0.07 ms | 0.09 ms
-**Custom** | 0.11 ms | 0.12 ms  | 0.05 ms | 0.05 ms
-**Dagger** | 0.01 ms | 0.01 ms  | 0.04 ms | 0.04 ms
+**Koin** | 5.68 ms | 6.04 ms  | 0.13 ms | 0.21 ms
+**Kodein** | 7.13 ms | 7.38 ms  | 0.20 ms | 0.21 ms
+**Katana** | 0.64 ms | 0.68 ms  | 0.21 ms | 0.16 ms
+**Custom** | 0.15 ms | 0.16 ms  | 0.11 ms | 0.11 ms
+**Dagger** | 0.01 ms | 0.01 ms  | 0.10 ms | 0.10 ms
 
 ### Huawei P8 Lite
 Huawei hwALE-H with Android 6.0
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 11.28 ms | 12.22 ms  | 0.25 ms | 0.25 ms
-**Kodein** | 64.97 ms | 64.91 ms  | 7.58 ms | 7.59 ms
-**Katana** | 10.37 ms | 10.43 ms  | 1.93 ms | 1.90 ms
-**Custom** | 4.32 ms | 4.32 ms  | 0.65 ms | 0.80 ms
-**Dagger** | 0.01 ms | 0.01 ms  | 0.23 ms | 0.20 ms
+**Koin** | 12.12 ms | 12.34 ms  | 0.26 ms | 0.26 ms
+**Kodein** | 14.46 ms | 14.52 ms  | 0.80 ms | 0.79 ms
+**Katana** | 2.01 ms | 1.99 ms  | 0.18 ms | 0.18 ms
+**Custom** | 0.51 ms | 0.50 ms  | 0.08 ms | 0.09 ms
+**Dagger** | 0.00 ms | 0.00 ms  | 0.03 ms | 0.02 ms
 
 ### Xiaomi MI A1
 xiaomi tissot_sprout with Android 8.1.0
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 6.53 ms | 6.77 ms  | 0.15 ms | 0.13 ms
-**Kodein** | 11.18 ms | 10.95 ms  | 0.29 ms | 0.26 ms
-**Katana** | 0.97 ms | 0.90 ms  | 0.13 ms | 0.13 ms
-**Custom** | 0.24 ms | 0.24 ms  | 0.08 ms | 0.10 ms
-**Dagger** | 0.01 ms | 0.01 ms  | 0.09 ms | 0.05 ms
+**Koin** | 9.17 ms | 11.10 ms  | 0.25 ms | 0.54 ms
+**Kodein** | 16.64 ms | 16.22 ms  | 0.82 ms | 0.32 ms
+**Katana** | 1.42 ms | 1.28 ms  | 0.31 ms | 0.31 ms
+**Custom** | 0.28 ms | 0.28 ms  | 0.19 ms | 0.23 ms
+**Dagger** | 0.02 ms | 0.02 ms  | 0.28 ms | 0.21 ms
 
 ### OnePlus One
 oneplus A0001 with Android 5.0.2
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 10.56 ms | 11.32 ms  | 0.29 ms | 0.28 ms
-**Kodein** | 78.66 ms | 73.30 ms  | 8.79 ms | 7.02 ms
-**Katana** | 12.08 ms | 9.38 ms  | 2.02 ms | 2.02 ms
-**Custom** | 4.27 ms | 4.32 ms  | 0.70 ms | 0.92 ms
-**Dagger** | 0.02 ms | 0.02 ms  | 0.22 ms | 0.19 ms
+**Koin** | 11.84 ms | 12.00 ms  | 0.27 ms | 0.30 ms
+**Kodein** | 22.52 ms | 23.05 ms  | 1.11 ms | 1.28 ms
+**Katana** | 1.87 ms | 1.58 ms  | 0.27 ms | 0.18 ms
+**Custom** | 0.43 ms | 0.35 ms  | 0.09 ms | 0.10 ms
+**Dagger** | 0.00 ms | 0.00 ms  | 0.04 ms | 0.04 ms
 
 ### OnePlus 5
 OnePlus OnePlus5 with Android 8.1.0
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 2.94 ms | 3.00 ms  | 0.06 ms | 0.06 ms
-**Kodein** | 4.78 ms | 4.66 ms  | 0.11 ms | 0.10 ms
-**Katana** | 0.33 ms | 0.32 ms  | 0.06 ms | 0.07 ms
-**Custom** | 0.08 ms | 0.08 ms  | 0.04 ms | 0.04 ms
-**Dagger** | 0.01 ms | 0.01 ms  | 0.05 ms | 0.04 ms
+**Koin** | 2.27 ms | 2.46 ms  | 0.05 ms | 0.05 ms
+**Kodein** | 4.81 ms | 4.43 ms  | 0.09 ms | 0.08 ms
+**Katana** | 0.34 ms | 0.32 ms  | 0.04 ms | 0.04 ms
+**Custom** | 0.07 ms | 0.08 ms  | 0.02 ms | 0.03 ms
+**Dagger** | 0.00 ms | 0.00 ms  | 0.04 ms | 0.02 ms
 
 ### Nexus 6
 google shamu with Android 7.1.1
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
-**Koin** | 17.89 ms | 18.23 ms  | 0.39 ms | 0.31 ms
-**Kodein** | 17.48 ms | 15.95 ms  | 0.60 ms | 0.47 ms
-**Katana** | 0.97 ms | 0.97 ms  | 0.54 ms | 0.59 ms
-**Custom** | 0.20 ms | 0.21 ms  | 0.20 ms | 0.20 ms
-**Dagger** | 0.02 ms | 0.02 ms  | 0.22 ms | 0.13 ms
+**Koin** | 19.80 ms | 20.43 ms  | 0.45 ms | 0.35 ms
+**Kodein** | 21.48 ms | 21.02 ms  | 0.74 ms | 0.62 ms
+**Katana** | 1.23 ms | 1.16 ms  | 0.31 ms | 0.27 ms
+**Custom** | 0.29 ms | 0.29 ms  | 0.20 ms | 0.31 ms
+**Dagger** | 0.03 ms | 0.03 ms  | 0.22 ms | 0.15 ms
