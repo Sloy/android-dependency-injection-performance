@@ -28,15 +28,15 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     // Koin
-    implementation "org.koin:koin-android:2.0.0-alpha-3"
+    implementation "org.koin:koin-android:2.0.0-beta-5"
 
     // Kodein
-    implementation 'org.kodein.di:kodein-di-erased-jvm:5.3.0'
+    implementation 'org.kodein.di:kodein-di-erased-jvm:6.1.0'
 
     // Dagger
-    implementation 'com.google.dagger:dagger:2.16'
-    kapt 'com.google.dagger:dagger-compiler:2.16'
+    implementation 'com.google.dagger:dagger:2.21'
+    kapt 'com.google.dagger:dagger-compiler:2.21'
 
     // Katana
-    implementation 'com.github.rewe-digital-incubator.katana:katana-android:1.2.2'
+    implementation 'org.rewedigital.katana:katana-android:1.4.0'
 }
