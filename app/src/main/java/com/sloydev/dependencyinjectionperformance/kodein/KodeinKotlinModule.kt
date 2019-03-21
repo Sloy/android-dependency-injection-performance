@@ -1,10 +1,10 @@
-package com.sloydev.dependencyinjectionperformance
-
+package com.sloydev.dependencyinjectionperformance.kodein
 
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
 import org.kodein.di.erased.provider
+import com.sloydev.dependencyinjectionperformance.*
 
 /**
  * Generated with https://gist.github.com/Sloy/12affca1e49ba052053ab4c8bfc5bcb4

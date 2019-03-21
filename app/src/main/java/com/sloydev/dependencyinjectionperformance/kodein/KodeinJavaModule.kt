@@ -1,5 +1,6 @@
-package com.sloydev.dependencyinjectionperformance
+package com.sloydev.dependencyinjectionperformance.kodein
 
+import com.sloydev.dependencyinjectionperformance.FibonacciJava
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance

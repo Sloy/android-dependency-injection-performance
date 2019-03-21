@@ -10,6 +10,7 @@ import com.sloydev.dependencyinjectionperformance.dagger2.JavaDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.KotlinDaggerComponent
 import com.sloydev.dependencyinjectionperformance.katana.katanaJavaModule
 import com.sloydev.dependencyinjectionperformance.katana.katanaKotlinModule
+import com.sloydev.dependencyinjectionperformance.kodein.kodeinKotlinModule
 import com.sloydev.dependencyinjectionperformance.koin.koinJavaModule
 import com.sloydev.dependencyinjectionperformance.koin.koinKotlinModule
 import org.kodein.di.Kodein
