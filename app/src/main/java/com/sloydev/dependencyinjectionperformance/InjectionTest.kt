@@ -28,12 +28,14 @@ import javax.inject.Inject
 
 class InjectionTest : KoinComponent {
 
+    private lateinit var callback: (String) -> Unit
     private val kotlinDaggerTest = KotlinDaggerTest()
     private val javaDaggerTest = JavaDaggerTest()
 
     private val rounds = 100
 
-    fun runTests() {
+    fun runTests(callback: (String) -> Unit) {
+        this.callback = callback
         val results = listOf(
             koinTest(),
             kodeinTest(),
@@ -45,15 +47,19 @@ class InjectionTest : KoinComponent {
     }
 
     private fun reportMarkdown(results: List<LibraryResult>) {
-        log("Done!")
-        log(" ")
-        log("${Build.BRAND} ${Build.DEVICE} with Android ${Build.VERSION.RELEASE}")
-        log(" ")
-        log("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java")
-        log("--- | ---:| ---:| ---:| ---:")
+        val sb = StringBuilder()
+        log("Done!\n")
+        sb.append("\n")
+        sb.append("${Build.BRAND} ${Build.DEVICE} with Android ${Build.VERSION.RELEASE}\n")
+        sb.append("\n")
+        sb.append("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java\n")
+        sb.append("--- | ---:| ---:| ---:| ---:\n")
         results.forEach {
-            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}")
+            sb.append("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}\n")
         }
+
+        log(sb.toString())
+        this.callback.invoke(sb.toString())
     }
 
     private fun runTest(
