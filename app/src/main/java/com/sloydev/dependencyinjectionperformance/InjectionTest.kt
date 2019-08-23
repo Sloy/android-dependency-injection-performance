@@ -28,14 +28,12 @@ import javax.inject.Inject
 
 class InjectionTest : KoinComponent {
 
-    private lateinit var callback: (String) -> Unit
     private val kotlinDaggerTest = KotlinDaggerTest()
     private val javaDaggerTest = JavaDaggerTest()
 
     private val rounds = 100
 
-    fun runTests(callback: (String) -> Unit) {
-        this.callback = callback
+    fun runTests(): List<LibraryResult> {
         val results = listOf(
             koinTest(),
             kodeinTest(),
@@ -44,23 +42,10 @@ class InjectionTest : KoinComponent {
             daggerTest()
         )
         reportMarkdown(results)
+        return results
     }
 
-    private fun reportMarkdown(results: List<LibraryResult>) {
-        val sb = StringBuilder()
-        log("Done!\n")
-        sb.append("\n")
-        sb.append("${Build.BRAND} ${Build.DEVICE} with Android ${Build.VERSION.RELEASE}\n")
-        sb.append("\n")
-        sb.append("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java\n")
-        sb.append("--- | ---:| ---:| ---:| ---:\n")
-        results.forEach {
-            sb.append("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}\n")
-        }
 
-        log(sb.toString())
-        this.callback.invoke(sb.toString())
-    }
 
     private fun runTest(
         setup: () -> Unit,
