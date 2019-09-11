@@ -3,10 +3,10 @@
 This project aims to measure the performance of several Dependency Injection frameworks (or Service Locators) in different devices.
 
 ## Libraries tested
-- [Koin](https://insert-koin.io/) - 2.0.0-alpha-3
-- [Kodein](http://kodein.org/Kodein-DI/) - 5.3.0
-- [Dagger 2](https://google.github.io/dagger/) - 2.16
-- [Katana](https://github.com/rewe-digital-incubator/katana/) - 1.2.2
+- [Koin](https://insert-koin.io/) - 2.0.1
+- [Kodein](http://kodein.org/Kodein-DI/) - 6.3.3
+- [Dagger 2](https://google.github.io/dagger/) - 2.24
+- [Katana](https://github.com/rewe-digital-incubator/katana/) - 1.7.1
 
 ## The test
 The test data are classes with dependencies in a structure similar to Fibonacci sequence, to simulate multiple levels of transitive dependencies.
@@ -28,9 +28,10 @@ Results can be quite different between different devices, so here are some resul
 - [OnePlus One](#oneplus-one)
 - [OnePlus 5](#oneplus-5)
 - [Nexus 6](#nexus-6)
+- [OnePlus 5T](#oneplus-5t) (dependencies updated)
 
 ### Samsung Galaxy J5
-samsung j5nlte with Android 6.0.1
+Samsung j5nlte with Android 6.0.1
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
@@ -41,7 +42,7 @@ Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 **Dagger** | 0.02 ms | 0.02 ms  | 0.27 ms | 0.23 ms
 
 ### Samsung Galaxy S8
-samsung dreamlte with Android 8.0.0
+Samsung dreamlte with Android 8.0.0
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
@@ -63,7 +64,7 @@ Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 **Dagger** | 0.00 ms | 0.00 ms  | 0.03 ms | 0.02 ms
 
 ### Xiaomi MI A1
-xiaomi tissot_sprout with Android 8.1.0
+Xiaomi tissot_sprout with Android 8.1.0
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
@@ -74,7 +75,7 @@ Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 **Dagger** | 0.02 ms | 0.02 ms  | 0.28 ms | 0.21 ms
 
 ### OnePlus One
-oneplus A0001 with Android 5.0.2
+OnePlus A0001 with Android 5.0.2
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
@@ -96,7 +97,7 @@ Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 **Dagger** | 0.00 ms | 0.00 ms  | 0.04 ms | 0.02 ms
 
 ### Nexus 6
-google shamu with Android 7.1.1
+Google shamu with Android 7.1.1
  
 Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 --- | ---:| ---:| ---:| ---:
@@ -105,3 +106,14 @@ Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
 **Katana** | 1.23 ms | 1.16 ms  | 0.31 ms | 0.27 ms
 **Custom** | 0.29 ms | 0.29 ms  | 0.20 ms | 0.31 ms
 **Dagger** | 0.03 ms | 0.03 ms  | 0.22 ms | 0.15 ms
+
+### OnePlus 5T
+OnePlus OnePlus5T with Android 9.0
+ 
+Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java
+--- | ---:| ---:| ---:| ---:
+**Koin** | 0.45 ms | 0.47 ms  | 0.06 ms | 0.05 ms
+**Kodein** | 5.21 ms | 5.30 ms  | 0.09 ms | 0.09 ms
+**Katana** | 0.34 ms | 0.37 ms  | 0.04 ms | 0.04 ms
+**Custom** | 0.08 ms | 0.08 ms  | 0.03 ms | 0.03 ms
+**Dagger** | 0.00 ms | 0.00 ms  | 0.03 ms | 0.04 ms
