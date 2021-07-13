@@ -10,6 +10,8 @@ import com.sloydev.dependencyinjectionperformance.dagger2.JavaDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.KotlinDaggerComponent
 import com.sloydev.dependencyinjectionperformance.katana.katanaJavaModule
 import com.sloydev.dependencyinjectionperformance.katana.katanaKotlinModule
+import com.sloydev.dependencyinjectionperformance.kodein.kodeinKotlinModule
+import com.sloydev.dependencyinjectionperformance.kodein.kodeinJavaModule
 import com.sloydev.dependencyinjectionperformance.koin.koinJavaModule
 import com.sloydev.dependencyinjectionperformance.koin.koinKotlinModule
 import org.kodein.di.Kodein
@@ -23,7 +25,6 @@ import org.rewedigital.katana.Component
 import org.rewedigital.katana.Katana
 import org.rewedigital.katana.android.environment.AndroidEnvironmentContext
 import org.rewedigital.katana.android.environment.AndroidEnvironmentContext.Profile.SPEED
-import org.rewedigital.katana.createComponent
 import javax.inject.Inject
 
 class InjectionTest : KoinComponent {
@@ -45,7 +46,17 @@ class InjectionTest : KoinComponent {
         return results
     }
 
-
+    private fun reportMarkdown(results: List<LibraryResult>) {
+        log("Done!")
+        log(" ")
+        log("${Build.BRAND} ${Build.DEVICE} with Android ${Build.VERSION.RELEASE}")
+        log(" ")
+        log("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java")
+        log("--- | ---:| ---:| ---:| ---:")
+        results.forEach {
+            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}")
+        }
+    }
 
     private fun runTest(
         setup: () -> Unit,
@@ -93,8 +104,8 @@ class InjectionTest : KoinComponent {
                 test = { kodein.direct.instance<Fib8>() }
             ),
             Variant.JAVA to runTest(
-                setup = { kodein = Kodein { import(kodeinKotlinModule) } },
-                test = { kodein.direct.instance<Fib8>() }
+                setup = { kodein = Kodein { import(kodeinJavaModule) } },
+                test = { kodein.direct.instance<FibonacciJava.Fib8>() }
             )
         ))
     }
@@ -105,11 +116,11 @@ class InjectionTest : KoinComponent {
         lateinit var component: Component
         return LibraryResult("Katana", mapOf(
             Variant.KOTLIN to runTest(
-                setup = { component = createComponent(modules = listOf(katanaKotlinModule)) },
+                setup = { component = Component(modules = listOf(katanaKotlinModule)) },
                 test = { component.injectNow<Fib8>() }
             ),
             Variant.JAVA to runTest(
-                setup = { component = createComponent(modules = listOf(katanaJavaModule)) },
+                setup = { component = Component(modules = listOf(katanaJavaModule)) },
                 test = { component.injectNow<FibonacciJava.Fib8>() }
             )
         ))
