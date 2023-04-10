@@ -3,26 +3,22 @@ package com.sloydev.dependencyinjectionperformance
 import android.os.Build
 import com.sloydev.dependencyinjectionperformance.custom.DIContainer
 import com.sloydev.dependencyinjectionperformance.custom.customKotlinModule
-import com.sloydev.dependencyinjectionperformance.dagger2.DaggerKotlinDaggerComponent
-import com.sloydev.dependencyinjectionperformance.dagger2.KotlinDaggerComponent
-import com.sloydev.dependencyinjectionperformance.koin.koinKotlinModule
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
-import javax.inject.Inject
+
+// Use Koin Generation
+import org.koin.ksp.generated.*
+
 
 class InjectionTest : KoinComponent {
-
-    private val kotlinDaggerTest = KotlinDaggerTest()
-
     private val rounds = 100
 
     fun runTests(): List<LibraryResult> {
         val results = listOf(
-            koinTest(),
-            customTest(),
-            daggerTest()
+            koinAnnotationTest(),
+            customTest()
         )
         reportMarkdown(results)
         return results
@@ -53,13 +49,13 @@ class InjectionTest : KoinComponent {
         return TestResult(startup, testDurations)
     }
 
-    private fun koinTest(): LibraryResult {
+    private fun koinAnnotationTest(): LibraryResult {
         log("Running Koin...")
-        return LibraryResult("Koin (DSL)", mapOf(
+        return LibraryResult("Koin (Annotation)", mapOf(
             Variant.KOTLIN to runTest(
                 setup = {
                     startKoin {
-                        modules(koinKotlinModule)
+                        modules(defaultModule)
                     }
                 },
                 test = { get<Fib8>() },
@@ -77,21 +73,5 @@ class InjectionTest : KoinComponent {
                 teardown = { DIContainer.unloadModules() }
             )
         ))
-    }
-
-    private fun daggerTest(): LibraryResult {
-        log("Running Dagger...")
-        lateinit var kotlinComponent: KotlinDaggerComponent
-        return LibraryResult("Dagger", mapOf(
-            Variant.KOTLIN to runTest(
-                setup = { kotlinComponent = DaggerKotlinDaggerComponent.create() },
-                test = { kotlinComponent.inject(kotlinDaggerTest) }
-            )
-        ))
-    }
-
-    class KotlinDaggerTest {
-        @Inject
-        lateinit var daggerFib8: Fib8
     }
 }

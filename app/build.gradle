@@ -1,13 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id "com.google.devtools.ksp" version "1.8.10-1.0.9"
 }
 
 
 android {
     namespace 'com.sloydev.dependencyinjectionperformance'
     compileSdk 33
+
+    applicationVariants.all { variant ->
+        variant.sourceSets.java.each {
+            it.srcDirs += "build/generated/ksp/${variant.name}/kotlin"
+        }
+    }
 
     defaultConfig {
         applicationId "com.sloydev.dependencyinjectionperformance"
@@ -43,8 +49,6 @@ dependencies {
 
     // Koin
     implementation "io.insert-koin:koin-android:3.4.0"
-
-    // Dagger
-    implementation 'com.google.dagger:dagger:2.45'
-    kapt 'com.google.dagger:dagger-compiler:2.45'
+    implementation "io.insert-koin:koin-annotations:1.2.0"
+    ksp "io.insert-koin:koin-ksp-compiler:1.2.0"
 }
