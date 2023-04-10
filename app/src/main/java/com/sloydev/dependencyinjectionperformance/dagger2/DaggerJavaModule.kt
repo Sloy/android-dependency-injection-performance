@@ -4,10 +4,12 @@ import com.sloydev.dependencyinjectionperformance.FibonacciJava
 import dagger.Module
 import dagger.Provides
 
+
 /**
  * Generated with https://gist.github.com/Sloy/12affca1e49ba052053ab4c8bfc5bcb4
  */
-@Module class JavaDaggerModule {
+@Module
+class JavaDaggerModule {
     @Provides fun provideFib1() = FibonacciJava.Fib1()
     @Provides fun provideFib2() = FibonacciJava.Fib2()
     @Provides fun provideFib3(fib2: FibonacciJava.Fib2, fib1: FibonacciJava.Fib1) = FibonacciJava.Fib3(fib2, fib1)

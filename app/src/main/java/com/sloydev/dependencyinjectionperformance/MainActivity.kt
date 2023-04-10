@@ -6,23 +6,23 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.plusAssign
 import androidx.core.view.updatePadding
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
-        fab.setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             runTests()
         }
 
@@ -49,13 +49,13 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun reportOnScreen(results: List<LibraryResult>) {
-        deviceInfo.text = """
+        findViewById<TextView>(R.id.deviceInfo).text = """
                 ${Build.BRAND} · ${Build.DEVICE}
                 Android ${Build.VERSION.RELEASE} (sdk ${Build.VERSION.SDK_INT})
             """.trimIndent()
 
         results.forEach { result ->
-            table += row(
+            findViewById<TableLayout>(R.id.table) += row(
                 nameCell(result.injectorName),
                 timeCell(result[Variant.JAVA].startupTime.median()),
                 timeCell(result[Variant.KOTLIN].startupTime.median()),
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        table.addView(
+        findViewById<TableLayout>(R.id.table).addView(
             separator(),
             ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1.dp)
         )
