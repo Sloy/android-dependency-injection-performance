@@ -17,3 +17,4 @@ The project contains an Android application that run the tests on its onCreate a
 The actual test is implemented in the class [InjectionTest.kt](https://github.com/Sloy/android-dependency-injection-performance/blob/master/app/src/main/java/com/sloydev/dependencyinjectionperformance/InjectionTest.kt)
 
 ## Results
+- ![result image](art/master-result.png "Result Image")
