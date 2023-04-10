@@ -40,10 +40,10 @@ class MainActivity : AppCompatActivity() {
         log("\n")
         log("${Build.BRAND} ${Build.DEVICE} with Android ${Build.VERSION.RELEASE}\n")
         log("\n")
-        log("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java\n")
+        log("Library | Setup Kotlin | Inject Kotlin \n")
         log("--- | ---:| ---:| ---:| ---:\n")
         results.forEach {
-            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}\n")
+            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.KOTLIN].injectionTime.median().format()} \n")
         }
     }
 
@@ -57,9 +57,7 @@ class MainActivity : AppCompatActivity() {
         results.forEach { result ->
             findViewById<TableLayout>(R.id.table) += row(
                 nameCell(result.injectorName),
-                timeCell(result[Variant.JAVA].startupTime.median()),
                 timeCell(result[Variant.KOTLIN].startupTime.median()),
-                timeCell(result[Variant.JAVA].injectionTime.median()),
                 timeCell(result[Variant.KOTLIN].injectionTime.median())
             )
         }

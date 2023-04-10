@@ -2,13 +2,9 @@ package com.sloydev.dependencyinjectionperformance
 
 import android.os.Build
 import com.sloydev.dependencyinjectionperformance.custom.DIContainer
-import com.sloydev.dependencyinjectionperformance.custom.customJavaModule
 import com.sloydev.dependencyinjectionperformance.custom.customKotlinModule
-import com.sloydev.dependencyinjectionperformance.dagger2.DaggerJavaDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.DaggerKotlinDaggerComponent
-import com.sloydev.dependencyinjectionperformance.dagger2.JavaDaggerComponent
 import com.sloydev.dependencyinjectionperformance.dagger2.KotlinDaggerComponent
-import com.sloydev.dependencyinjectionperformance.koin.koinJavaModule
 import com.sloydev.dependencyinjectionperformance.koin.koinKotlinModule
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -19,13 +15,13 @@ import javax.inject.Inject
 class InjectionTest : KoinComponent {
 
     private val kotlinDaggerTest = KotlinDaggerTest()
-    private val javaDaggerTest = JavaDaggerTest()
 
     private val rounds = 100
 
     fun runTests(): List<LibraryResult> {
         val results = listOf(
             koinTest(),
+            koinAnnotationTest(),
             customTest(),
             daggerTest()
         )
@@ -41,7 +37,7 @@ class InjectionTest : KoinComponent {
         log("Library | Setup Kotlin | Setup Java | Inject Kotlin | Inject Java")
         log("--- | ---:| ---:| ---:| ---:")
         results.forEach {
-            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()} | ${it[Variant.JAVA].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} | ${it[Variant.JAVA].injectionTime.median().format()}")
+            log("**${it.injectorName}** | ${it[Variant.KOTLIN].startupTime.median().format()}  | ${it[Variant.KOTLIN].injectionTime.median().format()} ")
         }
     }
 
@@ -70,15 +66,21 @@ class InjectionTest : KoinComponent {
                 test = { get<Fib8>() },
                 teardown = { stopKoin() }
             ),
-            Variant.JAVA to runTest(
+        ))
+    }
+
+    private fun koinAnnotationTest(): LibraryResult {
+        log("Running Koin...")
+        return LibraryResult("Koin (Annotation)", mapOf(
+            Variant.KOTLIN to runTest(
                 setup = {
                     startKoin {
-                        modules(koinJavaModule)
+                        modules(koinKotlinModule)
                     }
                 },
-                test = { get<FibonacciJava.Fib8>() },
+                test = { get<Fib8>() },
                 teardown = { stopKoin() }
-            )
+            ),
         ))
     }
 
@@ -89,11 +91,6 @@ class InjectionTest : KoinComponent {
                 setup = { DIContainer.loadModule(customKotlinModule) },
                 test = { DIContainer.get<Fib8>() },
                 teardown = { DIContainer.unloadModules() }
-            ),
-            Variant.JAVA to runTest(
-                setup = { DIContainer.loadModule(customJavaModule) },
-                test = { DIContainer.get<FibonacciJava.Fib8>() },
-                teardown = { DIContainer.unloadModules() }
             )
         ))
     }
@@ -101,15 +98,10 @@ class InjectionTest : KoinComponent {
     private fun daggerTest(): LibraryResult {
         log("Running Dagger...")
         lateinit var kotlinComponent: KotlinDaggerComponent
-        lateinit var javaComponent: JavaDaggerComponent
         return LibraryResult("Dagger", mapOf(
             Variant.KOTLIN to runTest(
                 setup = { kotlinComponent = DaggerKotlinDaggerComponent.create() },
                 test = { kotlinComponent.inject(kotlinDaggerTest) }
-            ),
-            Variant.JAVA to runTest(
-                setup = { javaComponent = DaggerJavaDaggerComponent.create() },
-                test = { javaComponent.inject(javaDaggerTest) }
             )
         ))
     }
@@ -117,10 +109,5 @@ class InjectionTest : KoinComponent {
     class KotlinDaggerTest {
         @Inject
         lateinit var daggerFib8: Fib8
-    }
-
-    class JavaDaggerTest {
-        @Inject
-        lateinit var daggerFib8: FibonacciJava.Fib8
     }
 }

@@ -17,7 +17,7 @@ data class TestResult(
 )
 
 enum class Variant {
-    KOTLIN, JAVA
+    KOTLIN
 }
 
 fun Milliseconds?.format() = String.format(Locale.ENGLISH, "%.2f ms", this)

@@ -7,8 +7,3 @@ import dagger.Component
 interface KotlinDaggerComponent {
     fun inject(injectionTest: InjectionTest.KotlinDaggerTest)
 }
-
-@Component(modules = [JavaDaggerModule::class])
-interface JavaDaggerComponent {
-    fun inject(injectionTest: InjectionTest.JavaDaggerTest)
-}
