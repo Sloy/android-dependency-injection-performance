@@ -21,7 +21,6 @@ class InjectionTest : KoinComponent {
     fun runTests(): List<LibraryResult> {
         val results = listOf(
             koinTest(),
-            koinAnnotationTest(),
             customTest(),
             daggerTest()
         )
@@ -57,21 +56,6 @@ class InjectionTest : KoinComponent {
     private fun koinTest(): LibraryResult {
         log("Running Koin...")
         return LibraryResult("Koin (DSL)", mapOf(
-            Variant.KOTLIN to runTest(
-                setup = {
-                    startKoin {
-                        modules(koinKotlinModule)
-                    }
-                },
-                test = { get<Fib8>() },
-                teardown = { stopKoin() }
-            ),
-        ))
-    }
-
-    private fun koinAnnotationTest(): LibraryResult {
-        log("Running Koin...")
-        return LibraryResult("Koin (Annotation)", mapOf(
             Variant.KOTLIN to runTest(
                 setup = {
                     startKoin {
